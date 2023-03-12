@@ -25,6 +25,7 @@ runs:
           script: return require('./package.json').version
 
       - name: Check for tag
+        shell: bash
         id: tagged
         run: git show-ref --tags --verify --quiet -- "refs/tags/${{ steps.package-version.outputs.result }}" && echo "tagged=0" >>$GITHUB_OUTPUT || echo "tagged=1" >>$GITHUB_OUTPUT
 
@@ -32,7 +33,7 @@ runs:
         if: steps.tagged.outputs.tagged == 0
         uses: actions/github-script@v6
         with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
+          github-token: ${{ inputs.github-token }}
           script: |
             github.rest.issues.create({
               owner: context.repo.owner,
