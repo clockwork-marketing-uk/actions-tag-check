@@ -1,10 +1,7 @@
 {
   "name": "actions-tag-check",
   "version": "1.0.0",
-  "description": "Check repository for tags",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+  "description": "GitHub Action that checks the version in the NPM package for use as a tag",
   "author": "Clockwork Marketing <dev@clock-work.co.uk>",
   "license": "ISC"
 }
