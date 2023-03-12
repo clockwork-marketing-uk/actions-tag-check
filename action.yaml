@@ -39,6 +39,6 @@ runs:
               repo: context.repo.repo,
               title: "Tag check failed",
               body: "The tag already exists",
-              labels: ['${{ steps.package-version.outputs.result }}', 'Failed Release', 'Test/Production']
-            core.setFailed('Release FAILED - Release Required')
+              labels: ['${{ steps.package-version.outputs.result }}', 'Tag Exists']
+            core.setFailed('Tag check FAILED')
 
