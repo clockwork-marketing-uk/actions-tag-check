@@ -1,0 +1,10 @@
+{
+  "name": "actions-tag-check",
+  "version": "1.0.0",
+  "description": "Check repository for tags",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Clockwork Marketing <dev@clock-work.co.uk>",
+  "license": "ISC"
+}
