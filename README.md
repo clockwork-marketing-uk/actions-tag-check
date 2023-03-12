@@ -9,7 +9,7 @@ GitHub Action that checks the version in the NPM package is not used as a tag.
     uses: clockwork-marketing-uk/actions-tag-check@1.0.0
     with:
         github-token: ${{ secrets.GITHUB_TOKEN }}
-
+        branch-name: ${{ github.event.pull_request.head_branch }}
 
 ```
 

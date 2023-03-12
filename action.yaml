@@ -5,6 +5,9 @@ inputs:
   github-token:
     description: "Github Token"
     required: true
+  branch-name:
+    description: "Current Branch"
+    required: true
 
 outputs:
   tag:
@@ -16,6 +19,8 @@ runs:
   steps:
       - name: Checkout Code
         uses: actions/checkout@v3
+        with:
+          ref: ${{ inputs.branch-name }}
 
       - name: Get Version
         id: package-version
