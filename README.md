@@ -18,4 +18,3 @@ GitHub Action that checks the version in the NPM package is not used as a tag.
 - Update the version in the [NPM package](package.json) as this is `NOT` automated in the repository.
 
 - Amend the [Change Log](CHANGELOG.md)
-
