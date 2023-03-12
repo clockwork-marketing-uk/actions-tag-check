@@ -5,9 +5,6 @@ inputs:
   github-token:
     description: "Github Token"
     required: true
-  branch-name:
-    description: "Current Branch"
-    required: true
 
 outputs:
   tag:
@@ -17,11 +14,6 @@ outputs:
 runs:
   using: composite
   steps:
-      - name: Checkout Code
-        uses: actions/checkout@v3
-        with:
-          ref: ${{ inputs.branch-name }}
-
       - name: Get Version
         id: package-version
         uses: actions/github-script@v6
@@ -37,12 +29,12 @@ runs:
       - name: Does not have a tag
         if: steps.tagged.outputs.tagged == 1
         shell: bash
-        run: echo $GITHUB_OUTPUT
+        run: echo No Tag
 
       - name: Does have a tag
         if: steps.tagged.outputs.tagged == 0
         shell: bash
-        run: echo $GITHUB_OUTPUT
+        run: echo Existing Tag
 
       - name: Already has this tag
         if: steps.tagged.outputs.tagged == 0
