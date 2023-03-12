@@ -1,6 +1,6 @@
 {
   "name": "actions-tag-check",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "GitHub Action that checks the version in the NPM package for use as a tag",
   "author": "Clockwork Marketing <dev@clock-work.co.uk>",
   "license": "ISC"

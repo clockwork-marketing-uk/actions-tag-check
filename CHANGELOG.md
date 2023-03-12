@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 
 ## Logs
 
+### 1.0.3 (2023-03-12)
+
+Testing
+
 ### 1.0.2 (2023-03-12)
 
 Allow for other branches
