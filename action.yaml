@@ -23,15 +23,15 @@ runs:
       - name: Check for tag
         shell: bash
         id: tagged
-        run: git show-ref --tags --verify --quiet -- "refs/tags/${{ inputs.tag_name }}" && echo "tagged=1" >>$GITHUB_OUTPUT || echo "tagged=0" >>$GITHUB_OUTPUT
+        run: git show-ref --tags --verify --quiet -- "refs/tags/${{ inputs.tag_name }}" && echo "tagged=0" >>$GITHUB_OUTPUT || echo "tagged=1" >>$GITHUB_OUTPUT
 
       - name: Does not have a tag
-        if: steps.tagged.outputs.tagged == 1
+        if: steps.tagged.outputs.tagged == 0
         shell: bash
         run: echo No Tag
 
       - name: Does have a tag
-        if: steps.tagged.outputs.tagged == 0
+        if: steps.tagged.outputs.tagged == 1
         shell: bash
         run: echo Existing Tag
 
