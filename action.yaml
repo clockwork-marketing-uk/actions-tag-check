@@ -2,29 +2,28 @@ name: Tag Checks
 description: "Check repository for tags"
 
 inputs:
-  github-token:
-    description: "Github Token"
+  tag_name:
+    description: "Tag name"
     required: true
 
 outputs:
-  tag:
-    description: "Tag name"
-    value: ${{ steps.package-version.outputs.result }}
+  has_tag:
+    description: "Has the tag name provided"
+    value: ${{ steps.tagged.outputs.tagged }}
 
 runs:
   using: composite
   steps:
-      - name: Get Version
-        id: package-version
-        uses: actions/github-script@v6
-        with:
-          result-encoding: string
-          script: return require('./package.json').version
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Fetch tags
+        shell: bash
+        run: git fetch --depth=1 origin +refs/tags/*:refs/tags/*
 
       - name: Check for tag
         shell: bash
         id: tagged
-        run: git show-ref --tags --verify --quiet -- "refs/tags/${{ steps.package-version.outputs.result }}" && echo "tagged=0" >>$GITHUB_OUTPUT || echo "tagged=1" >>$GITHUB_OUTPUT
+        run: git show-ref --tags --verify --quiet -- "refs/tags/${{ inputs.tag_name }}" && echo "tagged=1" >>$GITHUB_OUTPUT || echo "tagged=0" >>$GITHUB_OUTPUT
 
       - name: Does not have a tag
         if: steps.tagged.outputs.tagged == 1
@@ -36,17 +35,5 @@ runs:
         shell: bash
         run: echo Existing Tag
 
-      - name: Already has this tag
-        if: steps.tagged.outputs.tagged == 0
-        uses: actions/github-script@v6
-        with:
-          github-token: ${{ inputs.github-token }}
-          script: |
-            github.rest.issues.create({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              title: "Tag check failed",
-              body: "The tag already exists",
-              labels: ['${{ steps.package-version.outputs.result }}', 'Tag Exists']
-            core.setFailed('Tag check FAILED')
+
 

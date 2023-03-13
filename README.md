@@ -6,9 +6,10 @@ GitHub Action that checks the version in the NPM package is not used as a tag.
 
   - name: Check for version tag
     id: check-tag
-    uses: clockwork-marketing-uk/actions-tag-check@1.0.0
+    uses: clockwork-marketing-uk/actions-tag-check@1.1.0
     with:
         github-token: ${{ secrets.GITHUB_TOKEN }}
+        tag_name: "1.1.0"
 
 ```
 
